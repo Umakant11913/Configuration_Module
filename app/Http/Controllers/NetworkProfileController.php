@@ -308,47 +308,47 @@ class NetworkProfileController extends Controller
         }
     }
 
-    public function getProfileDropdowns()
-    {
-        try {
-            $profiles = NetworkProfile::select('id', 'name', 'type')
-                ->where('is_deleted', 0)
-                ->where('profile_status', 'active')
-                ->where("type", request()->get("type"))
-                ->where('pdo_id', Auth::user()->id) // or remove this if not needed
-                ->get();
+    // public function getProfileDropdowns()
+    // {
+    //     try {
+    //         $profiles = NetworkProfile::select('id', 'name', 'type')
+    //             ->where('is_deleted', 0)
+    //             ->where('profile_status', 'active')
+    //             ->where("type", request()->get("type"))
+    //             ->where('pdo_id', Auth::user()->id) // or remove this if not needed
+    //             ->get();
 
-            return response()->json([
-                'data' => $profiles,
-                'message' => 'success'
-            ], 200);
+    //         return response()->json([
+    //             'data' => $profiles,
+    //             'message' => 'success'
+    //         ], 200);
 
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage()
-            ], 500);
-        }
-    }
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'message' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
 
-    public function toggleStatus($profileId)
-    {
-        try {
-            $profile = NetworkProfile::findOrFail($profileId);
-            $profile->profile_status = ($profile->profile_status === 'active') ? 'inactive' : 'active';
-            $profile->save();
+    // public function toggleStatus($profileId)
+    // {
+    //     try {
+    //         $profile = NetworkProfile::findOrFail($profileId);
+    //         $profile->profile_status = ($profile->profile_status === 'active') ? 'inactive' : 'active';
+    //         $profile->save();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Profile status updated successfully.',
-                'new_status' => $profile->profile_status
-            ]);
+    //         return response()->json([
+    //             'success' => true,
+    //             'message' => 'Profile status updated successfully.',
+    //             'new_status' => $profile->profile_status
+    //         ]);
 
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to update profile status.',
-                'error' => $e->getMessage()
-            ], 500);
-        }
-    }
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Failed to update profile status.',
+    //             'error' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
 }
