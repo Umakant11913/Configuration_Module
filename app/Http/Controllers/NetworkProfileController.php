@@ -29,7 +29,7 @@ class NetworkProfileController extends Controller
         // }
 
         $user = CentralUserService::resolve($request);
-        dd($user);
+        //dd($user);
         // if ($request->ajax()) {
 
 
