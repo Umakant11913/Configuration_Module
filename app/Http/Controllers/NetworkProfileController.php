@@ -29,7 +29,6 @@ class NetworkProfileController extends Controller
         // }
 
         $user = CentralUserService::resolve($request);
-        //dd($user);
         // if ($request->ajax()) {
 
 
@@ -330,25 +329,25 @@ class NetworkProfileController extends Controller
     //     }
     // }
 
-    // public function toggleStatus($profileId)
-    // {
-    //     try {
-    //         $profile = NetworkProfile::findOrFail($profileId);
-    //         $profile->profile_status = ($profile->profile_status === 'active') ? 'inactive' : 'active';
-    //         $profile->save();
+    public function toggleStatus($profileId)
+    {
+        try {
+            $profile = NetworkProfile::findOrFail($profileId);
+            $profile->profile_status = ($profile->profile_status === 'active') ? 'inactive' : 'active';
+            $profile->save();
 
-    //         return response()->json([
-    //             'success' => true,
-    //             'message' => 'Profile status updated successfully.',
-    //             'new_status' => $profile->profile_status
-    //         ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Profile status updated successfully.',
+                'new_status' => $profile->profile_status
+            ]);
 
-    //     } catch (\Exception $e) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Failed to update profile status.',
-    //             'error' => $e->getMessage()
-    //         ], 500);
-    //     }
-    // }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update profile status.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
